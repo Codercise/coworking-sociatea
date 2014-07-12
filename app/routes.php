@@ -11,6 +11,7 @@
 |
 */
 Route::resource('oauth', 'OAuthController');
+Route::resource('user', 'UserController');
 
 Route::get('/facebook', 'OAuthController@loginWithFacebook');
 Route::get('/', function()
