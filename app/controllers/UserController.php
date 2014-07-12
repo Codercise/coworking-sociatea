@@ -18,11 +18,9 @@ class UserController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create($fbData)
+	public function create()
 	{
-		$user = new User;
-
-		var_dump($fbData);
+		//
 	}
 
 

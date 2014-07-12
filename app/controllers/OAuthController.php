@@ -49,7 +49,11 @@ class OAuthController extends \BaseController {
 	        $result = json_decode( $fb->request( '/me' ), true );
 	        //$message = 'Your unique facebook user id is: ' . $result['id'] . ' and your name is ' . $result['name'];
 	        //echo $message. "<br/>";
-	        //return Redirect::to("/user/create")->with('fbData', $result);
+	        $user = new User;
+	        $user->facebook_id = $result['id'];
+	        $user->name = $result['first_name'] ." ". $result['last_name'];
+	        $user->email = $result['email'];
+	        $user->save();
 	        //display whole array().
 	        var_dump($result);
 	        //dd($result);
