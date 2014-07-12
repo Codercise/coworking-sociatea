@@ -1,8 +1,7 @@
 // Author: The Coworking Sociatea (Sami Peachey)
-// July 12, 2014
-// Converts the data found here: http://data.sa.gov.au/dataset/library-locations
+// July 13, 2014
+// Converts the data found here: http://data.sa.gov.au/dataset/adelaidefree-wi-fi-access-point-locations
 // Into a JSON file for reading into The Coworking Sociatea app
-
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,7 +15,7 @@ import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class LibParser {
+public class WifiParser {
 	
 	
 	public void parse(FileReader file) {
@@ -32,17 +31,14 @@ public class LibParser {
 			String input;
 			
 			input = br.readLine();
-			String[] headers = input.split(";");
+			String[] headers = input.split(",");
 			
 			for (int i = 0; i < headers.length; i++) {
-				if (headers[i].equals("XCoord")) {
+				if (headers[i].equals("Longitude")) {
 					headers[i] = "longitude";
 				}
-				if (headers[i].equals("YCoord")) {
+				if (headers[i].equals("Latitude")) {
 					headers[i] = "latitude";
-				}
-				if (headers[i].equals("ADDRESS")) {
-					headers[i] = "address";
 				}
 			}
 			
@@ -50,7 +46,7 @@ public class LibParser {
 			
 			while((input=br.readLine())!=null){
 				
-				String[] info = input.split(";");
+				String[] info = input.split(",");
 				
 				if (headers.length == info.length) {
 					
@@ -65,7 +61,7 @@ public class LibParser {
 				
 			}
 			
-			FileWriter outputfile = new FileWriter("../data/libraries.json");
+			FileWriter outputfile = new FileWriter("../data/wifi.json");
 			
 			outputfile.write("[");
 			
@@ -83,8 +79,7 @@ public class LibParser {
 		} catch(IOException io) {
 			io.printStackTrace();
 		}
-		
-		
+
 	}
 	
 	
@@ -93,14 +88,13 @@ public class LibParser {
 		try {
 			
 			//open file
-			FileReader file = new FileReader("../data/libraries.txt");
+			FileReader file = new FileReader("../data/wifi.csv");
 			
-			LibParser parser = new LibParser();
+			WifiParser parser = new WifiParser();
 			parser.parse(file);
 		} catch (IOException io) {
 			io.printStackTrace();
 		}
 		
 	}
-	
 }
