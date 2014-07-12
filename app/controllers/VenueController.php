@@ -9,7 +9,8 @@ class VenueController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		$venues = Venue::all();
+		return View::make('venues.index')->with('venues', $venues);
 	}
 
 
