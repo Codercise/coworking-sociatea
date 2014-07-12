@@ -13,7 +13,8 @@ class AddUsersTable extends Migration {
 	public function up()
 	{
 		Schema::create('users', function($t) {
-			$t->string('id');
+			$t->string('facebook_id');
+			$t->string('name', 75);
 			$t->string('email');
 			$t->timestamps();
 		});
