@@ -2,13 +2,19 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import java.io.FileWriter;
 import java.io.InputStream;
+import java.io.IOException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.LinkedList;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 public class Sensis {
 	
@@ -62,15 +68,35 @@ public class Sensis {
 			System.out.println("Total results found: " +
 												 root.get("totalResults").getIntValue());
 			
+			ArrayList<JSONObject> objects = new ArrayList<JSONObject>();
+			
+			
+			
+			
 			// iterate over the results
 			for (JsonNode result : root.get("results")) {
-				// print the business name and display address
-				System.out.println(result.path("name").getTextValue()
-													 + " (" + result.path("primaryAddress").path("addressLine").getTextValue() + ")");
+				
+				JSONObject obj = new JSONObject();
+				obj.put("name", result.path("name").getTextValue());
+				obj.put("address", result.path("primaryAddress").path("addressLine").getTextValue());
+				obj.put("latitude", result.path("primaryAddress").path("latitude").getTextValue());
+				obj.put("longitude", result.path("primaryAddress").path("longitude").getTextValue());
+				
+				objects.add(obj);
 			}
+			
+			
+			FileWriter file = new FileWriter("cafe.json");
+			for (JSONObject obj : objects) {
+				file.write(obj.toJSONString());
+			}
+			file.flush();
+			file.close();
 			
 			stream.close();
 			
+		} catch (IOException e) {
+			e.printStackTrace();
 		} finally {
 			conn.disconnect(); // ensure we always close the connection
 		}
