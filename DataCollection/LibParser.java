@@ -34,6 +34,18 @@ public class LibParser {
 			input = br.readLine();
 			String[] headers = input.split(";");
 			
+			for (int i = 0; i < headers.length; i++) {
+				if (headers[i].equals("XCoord")) {
+					headers[i] = "longitude";
+				}
+				if (headers[i].equals("YCoord")) {
+					headers[i] = "latitude";
+				}
+				if (headers[i].equals("ADDRESS")) {
+					headers[i] = "address";
+				}
+			}
+			
 			ArrayList<JSONObject> objects = new ArrayList<JSONObject>();
 			
 			while((input=br.readLine())!=null){
@@ -55,11 +67,16 @@ public class LibParser {
 			
 			FileWriter outputfile = new FileWriter("../data/libraries.json");
 			
+			outputfile.write("[");
+			
 			//Write all objects out to a file
 			for (JSONObject obj : objects) {
 				outputfile.write(obj.toJSONString());
+				outputfile.write(",\n");
 			}
 			outputfile.flush();
+			
+			outputfile.write("]");
 			
 			outputfile.close();
 			

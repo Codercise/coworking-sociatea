@@ -101,6 +101,7 @@ public class Sensis {
 			
 			for (JSONObject obj : objects) {
 				file.write(obj.toJSONString());
+				file.write(",");
 			}
 			file.flush();
 			
@@ -117,7 +118,7 @@ public class Sensis {
 	public static void main(String[] args) throws Exception {
 		
 		try {
-			file = new FileWriter("restaurant.json");
+			file = new FileWriter("restaurant2.json");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
