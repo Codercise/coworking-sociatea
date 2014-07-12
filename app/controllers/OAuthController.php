@@ -54,6 +54,8 @@ class OAuthController extends \BaseController {
 	        $user->name = $result['first_name'] ." ". $result['last_name'];
 	        $user->email = $result['email'];
 	        if($user->save()) {
+	        	Auth::login($user);
+	        	Session::put('user', $user);
 						return Redirect::action('UserController@show', $user->id);
 	        } else {
 	        	return Redirect::to('/')->with('facebook_error', 'Login Unsuccessful');

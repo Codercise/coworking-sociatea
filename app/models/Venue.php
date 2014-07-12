@@ -14,4 +14,8 @@ class Venue extends Eloquent {
    */
   protected $table = 'venues';
 
+  public function Checkins()
+  {
+    return $this->has_many('Checkins');
+  }
 }

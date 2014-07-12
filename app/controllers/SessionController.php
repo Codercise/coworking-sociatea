@@ -1,6 +1,6 @@
 <?php
 
-class VenueController extends \BaseController {
+class SessionController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -9,8 +9,7 @@ class VenueController extends \BaseController {
 	 */
 	public function index()
 	{
-		$venues = Venue::all();
-		return View::make('venues.index')->with('venues', $venues);
+		//
 	}
 
 
@@ -44,8 +43,7 @@ class VenueController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$venue = Venue::find($id);
-		return View::make('venues.show')->with('venue', $venue);
+		//
 	}
 
 
@@ -79,9 +77,10 @@ class VenueController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy()
 	{
-		//
+		Session::flush();
+		return Redirect::to('/');
 	}
 
 
