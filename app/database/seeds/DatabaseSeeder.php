@@ -21,11 +21,22 @@ class VenueTableSeeder extends Seeder {
     public function run()
     {
         //DB::table('venues')->delete();
-    		$cafeJsonOriginal = file_get_contents("app/database/seeds/data/cafe.json");
-    		var_dump($cafeJsonOriginal);
+    		$cafeJsonOriginal = file_get_contents("app/database/data/libraries.json");
+    		//var_dump($cafeJsonOriginal);
     		$cafeJson = json_decode($cafeJsonOriginal, true);
     		var_dump($cafeJson);
         //Venue::create(array('email' => 'foo@bar.com'));
+        for ($i=0; $i < count($cafeJson); $i++) {
+          echo $cafeJson[$i]["NAME"];
+          $venue = new Venue;
+          Venue::create(array(
+            'name' => $cafeJson[$i]["NAME"],
+            'address' => $cafeJson[$i]["ADDRESS"],
+            'latitude' => $cafeJson[$i]["XCoord"],
+            'longitude' => $cafeJson[$i]["YCoord"],
+            'type' => 'Libraries'
+          ));
+        }
     }
 
 }
