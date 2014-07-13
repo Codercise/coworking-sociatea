@@ -36,7 +36,6 @@ class VenueTableSeeder extends Seeder {
         ));
       }*/
       for ($i = 0; $i < count($json); $i++) {
-        foreach ($json[$i] as $key => $value) {
           echo $json[$i]["id"];
           WifiVenue::create(array(
             'wifi_point_id' => $json[$i]["id"],
@@ -45,7 +44,6 @@ class VenueTableSeeder extends Seeder {
             'restaurants' => implode('; ', $json[$i]["restaurants"]),
             'libraries' => implode('; ', $json[$i]["libraries"])
           ));
-        }
       }
     }
 

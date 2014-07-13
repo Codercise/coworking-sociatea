@@ -45,7 +45,17 @@ class WifiPointController extends \BaseController {
 	public function show($id)
 	{
 		$wifi_point = WifiPoint::find($id);
-		return View::make('wifi_points.show')->with('wifi_point', $wifi_point);
+		$closest_venues = WifiVenue::where('wifi_point_id', $wifi_point->name)->first();
+		$closest_pubs = explode("; ", $closest_venues["pubs"]);
+		$closest_cafes = explode("; ", $closest_venues["cafes"]);
+		$closest_restaurants = explode("; ", $closest_venues["restaurants"]);
+		$closest_libraries = explode("; ", $closest_venues["libraries"]);
+
+		return View::make('wifi_points.show')->with('wifi_point', $wifi_point)
+																				 ->with('closest_pubs', $closest_pubs)
+																				 ->with('closest_cafes', $closest_cafes)
+																				 ->with('closest_restaurants', $closest_restaurants)
+																				 ->with('closest_libraries', $closest_libraries);
 	}
 
 
