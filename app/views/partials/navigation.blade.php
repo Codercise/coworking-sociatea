@@ -16,6 +16,7 @@
       <ul class="nav navbar-nav">
         <li>{{ link_to('/', "Home") }}</li>
         <li>{{ link_to('/venues', "Venues") }}</a></li>
+        <li>{{ link_to('/wifipoints', "Wifi Points")}}
         @if(Session::get('user'))
           <li>{{ link_to_action("UserController@show", "Profile", array(Auth::user()->id)) }}</a></li>
         @endif
