@@ -51,11 +51,27 @@ class WifiPointController extends \BaseController {
 		$closest_restaurants = explode("; ", $closest_venues["restaurants"]);
 		$closest_libraries = explode("; ", $closest_venues["libraries"]);
 
+		$closest_venue["pubs"] = [];
+		foreach ($closest_pubs as $key => $value) {
+			array_push($closest_venue["pubs"], Venue::where('address', '=', $value)->first());
+		}
+		$closest_venue["cafes"] = [];
+		foreach ($closest_cafes as $key => $value) {
+			array_push($closest_venue["cafes"], Venue::where('address', '=', $value)->first());
+		}
+		$closest_venue["restaurants"] = [];
+		foreach ($closest_restaurants as $key => $value) {
+			array_push($closest_venue["restaurants"], Venue::where('address', '=', $value)->first());
+		}
+		$closest_venue["libraries"] = [];
+		foreach ($closest_libraries as $key => $value) {
+			array_push($closest_venue["libraries"], Venue::where('address', '=', $value)->first());
+		}
 		return View::make('wifi_points.show')->with('wifi_point', $wifi_point)
-																				 ->with('closest_pubs', $closest_pubs)
-																				 ->with('closest_cafes', $closest_cafes)
-																				 ->with('closest_restaurants', $closest_restaurants)
-																				 ->with('closest_libraries', $closest_libraries);
+																				 ->with('closest_pubs', $closest_venue["pubs"])
+																				 ->with('closest_cafes', $closest_venue["cafes"])
+																				 ->with('closest_restaurants', $closest_venue["restaurants"])
+																				 ->with('closest_libraries', $closest_venue["libraries"]);
 	}
 
 

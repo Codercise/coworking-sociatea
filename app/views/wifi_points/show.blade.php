@@ -9,21 +9,28 @@
   <h2>Closest Pubs</h2>
   <ul>
     @for($i = 0; $i < count($closest_pubs); $i++)
-      <li>{{ $closest_pubs[$i] }}</li>
+      <li><strong>{{ $closest_pubs[$i]->name }}</strong>, {{ $closest_pubs[$i]->address }}</li>
     @endfor
   </ul>
 
   <h2>Closest Cafes</h2>
   <ul>
     @for($i = 0; $i < count($closest_cafes); $i++)
-      <li>{{ $closest_cafes[$i] }}</li>
+      <li><strong>{{ $closest_cafes[$i]->name }}</strong>, {{ $closest_cafes[$i]->address }}</li>
     @endfor
   </ul>
 
   <h2>Closest Restaurants</h2>
   <ul>
     @for($i = 0; $i < count($closest_restaurants); $i++)
-      <li>{{ $closest_restaurants[$i] }}</li>
+      <li><strong>{{ $closest_restaurants[$i]->name }}</strong>, {{ $closest_restaurants[$i]->address }}</li>
+    @endfor
+  </ul>
+
+  <h2>Closest Libraries</h2>
+  <ul>
+    @for($i = 0; $i < count($closest_libraries); $i++)
+      <li><strong>{{ $closest_libraries[$i]->name }}</strong>, {{ $closest_libraries[$i]->address }}</li>
     @endfor
   </ul>
 @stop
