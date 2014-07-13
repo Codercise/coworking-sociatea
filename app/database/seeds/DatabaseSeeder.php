@@ -20,23 +20,31 @@ class VenueTableSeeder extends Seeder {
 
     public function run()
     {
-        //DB::table('venues')->delete();
-    		$cafeJsonOriginal = file_get_contents("app/database/data/libraries.json");
-    		//var_dump($cafeJsonOriginal);
-    		$cafeJson = json_decode($cafeJsonOriginal, true);
-    		var_dump($cafeJson);
-        //Venue::create(array('email' => 'foo@bar.com'));
-        for ($i=0; $i < count($cafeJson); $i++) {
-          echo $cafeJson[$i]["NAME"];
-          $venue = new Venue;
-          Venue::create(array(
-            'name' => $cafeJson[$i]["NAME"],
-            'address' => $cafeJson[$i]["ADDRESS"],
-            'latitude' => $cafeJson[$i]["XCoord"],
-            'longitude' => $cafeJson[$i]["YCoord"],
-            'type' => 'Libraries'
+      //DB::table('venues')->delete();
+  		$jsonOriginal = file_get_contents("app/database/data/venues.json");
+  		//var_dump($cafeJsonOriginal);
+  		$json = json_decode($jsonOriginal, true);
+  		//var_dump($json);
+      //Venue::create(array('email' => 'foo@bar.com'));
+      /*for ($i=0; $i < count($json); $i++) {
+        echo $json[$i]["AP NAME"];
+        $venue = new Venue;
+        WifiPoint::create(array(
+          'name' => $json[$i]["AP NAME"],
+          'latitude' => $json[$i]["latitude"],
+          'longitude' => $json[$i]["longitude"]
+        ));
+      }*/
+      for ($i = 0; $i < count($json); $i++) {
+          echo $json[$i]["id"];
+          WifiVenue::create(array(
+            'wifi_point_id' => $json[$i]["id"],
+            'pubs' => implode('; ', $json[$i]["pubs"]),
+            'cafes' => implode('; ', $json[$i]["cafes"]),
+            'restaurants' => implode('; ', $json[$i]["restaurants"]),
+            'libraries' => implode('; ', $json[$i]["libraries"])
           ));
-        }
+      }
     }
 
 }

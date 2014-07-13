@@ -1,10 +1,5 @@
 <?php
 
-use Illuminate\Auth\UserTrait;
-use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableTrait;
-use Illuminate\Auth\Reminders\RemindableInterface;
-
 class Venue extends Eloquent {
 
   /**
@@ -14,4 +9,8 @@ class Venue extends Eloquent {
    */
   protected $table = 'venues';
 
+  public function Checkins()
+  {
+    return $this->has_many('Checkins');
+  }
 }

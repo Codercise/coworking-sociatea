@@ -1,6 +1,6 @@
 <?php
 
-class VenueController extends \BaseController {
+class WifiPointController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -9,8 +9,8 @@ class VenueController extends \BaseController {
 	 */
 	public function index()
 	{
-		$venues = Venue::all();
-		return View::make('venues.index')->with('venues', $venues);
+		$wifi_points = WifiPoint::all();
+		return View::make('wifi_points.index')->with('wifi_points', $wifi_points);
 	}
 
 
@@ -44,8 +44,18 @@ class VenueController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$venue = Venue::find($id);
-		return View::make('venues.show')->with('venue', $venue);
+		$wifi_point = WifiPoint::find($id);
+		$closest_venues = WifiVenue::where('wifi_point_id', $wifi_point->name)->first();
+		$closest_pubs = explode("; ", $closest_venues["pubs"]);
+		$closest_cafes = explode("; ", $closest_venues["cafes"]);
+		$closest_restaurants = explode("; ", $closest_venues["restaurants"]);
+		$closest_libraries = explode("; ", $closest_venues["libraries"]);
+
+		return View::make('wifi_points.show')->with('wifi_point', $wifi_point)
+																				 ->with('closest_pubs', $closest_pubs)
+																				 ->with('closest_cafes', $closest_cafes)
+																				 ->with('closest_restaurants', $closest_restaurants)
+																				 ->with('closest_libraries', $closest_libraries);
 	}
 
 

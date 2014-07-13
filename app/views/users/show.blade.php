@@ -1,4 +1,8 @@
 @extends('partials.application')
 @section('content')
-  <?php var_dump($user); ?>
+  <ul>
+  @foreach ($user["attributes"] as $key => $value)
+    <li><strong>{{ ucfirst($key) .":" }}</strong> {{ $value }}
+  @endforeach
+  </ul>
 @stop

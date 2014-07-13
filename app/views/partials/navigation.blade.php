@@ -14,9 +14,12 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">War</a></li>
-        <li><a href="#">Tapir</a></li>
-        <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Productions</a></li>
+        <li>{{ link_to('/', "Home") }}</li>
+        <li>{{ link_to('/venues', "Venues") }}</a></li>
+        <li>{{ link_to('/wifipoints', "Wifi Points")}}
+        @if(Session::get('user'))
+          <li>{{ link_to_action("UserController@show", "Profile", array(Auth::user()->id)) }}</a></li>
+        @endif
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

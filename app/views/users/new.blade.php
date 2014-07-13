@@ -4,5 +4,9 @@
   @if(isset($facebook_error))
     <div class="alert alert-danger" role="alert">{{ $facebook_error }}</div>
   @endif
-  <h2>{{ link_to_action('OAuthController@loginWithFacebook', 'Login with Facebook') }}</h2>
+  @if(Auth::check())
+    <a href="/logout"><button class="btn btn-large btn-danger">Logout</button></a>
+  @else
+    {{ link_to_action('OAuthController@loginWithFacebook', "Login with Facebook", null, array('class' => 'btn btn-large btn-primary')) }}
+  @endif
 @stop
