@@ -15,6 +15,7 @@ Route::resource('user', 'UserController');
 Route::resource('venues', 'VenueController');
 Route::resource('session', 'SessionController');
 Route::resource('wifipoints', 'WifiPointController');
+Route::resource('checkin', 'CheckinController');
 
 Route::get('/facebook', 'OAuthController@loginWithFacebook');
 Route::get('/venues', 'VenueController@index');
@@ -22,6 +23,7 @@ Route::get('/venue/{id}', 'VenueController@show');
 Route::get('/logout', 'SessionController@destroy');
 Route::get('/wifipoints', 'WifiPointController@index');
 Route::get('/wifipoints/{id}', 'WifiPointController@show');
+Route::get('/checkin/{venue_id}', "CheckinController@store");
 Route::get('/', function()
 {
 	return View::make('users.new');

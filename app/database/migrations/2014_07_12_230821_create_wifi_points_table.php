@@ -12,7 +12,7 @@ class CreateWifiPointsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('wifi_points', function($t) {
+		Schema::create('wifi_points', function($t) {
 			$t->increments('id');
 			$t->string('name');
 			$t->string('latitude');
