@@ -20,7 +20,6 @@ class CheckinController extends \BaseController {
 	 */
 	public function create()
 	{
-		return "hell";
 		$checkin = new Checkin();
 		$checkin->venue_id = $venue_id;
 		$checkin->user_id = Session::get('user["id"]');
