@@ -25,7 +25,6 @@ class CheckinController extends \BaseController {
 		$checkin->user_id = Session::get('user["id"]');
 		$checkin->save();
 		Session::put('checked_in', true);
-		return $venue_id;
 		return View::make('/venue/{$venue_id}');
 	}
 
